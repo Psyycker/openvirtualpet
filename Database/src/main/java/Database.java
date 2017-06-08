@@ -46,6 +46,15 @@ public class Database {
         return null;
     }
 
+    public boolean gameExists(){
+        try {
+            input = new FileReader(PETFILE);
+            return true;
+        } catch (FileNotFoundException e) {
+            return false;
+        }
+    }
+
     public void saveSaveFile(DatabaseObject object){
         Gson gson = new GsonBuilder().create();
         String jsonobj = gson.toJson(object);
