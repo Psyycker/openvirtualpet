@@ -1,4 +1,5 @@
 import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by rvillules on 08/06/17.
@@ -11,6 +12,11 @@ public class DatabaseObject {
     public String petName;
 
 
+    public static long currentTimeSeconds(){
+        long timeMillis = System.currentTimeMillis();
+        return TimeUnit.MILLISECONDS.toSeconds(timeMillis);
+    }
+
 
     public DatabaseObject(){
 
@@ -18,7 +24,7 @@ public class DatabaseObject {
 
     public DatabaseObject(Pet pet){
         update(pet);
-        lastUpdate = System.currentTimeMillis();
+        lastUpdate = currentTimeSeconds();
     }
 
     public void update(Pet pet){

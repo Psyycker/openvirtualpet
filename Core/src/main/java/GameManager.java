@@ -18,8 +18,9 @@ public class GameManager {
         pet.name = "George";
         pet.age = 25;
         Database.getDatabase().saveSaveFile(new DatabaseObject(pet));
-        lastModif = System.currentTimeMillis();
+        lastModif = DatabaseObject.currentTimeSeconds();
     }
+
 
     /**
      * Launch the game, THIS IS NOT A NEW GAME.
