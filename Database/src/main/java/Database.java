@@ -1,8 +1,7 @@
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.util.Properties;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.io.*;
 
 /**
  * Created by rvillules on 08/06/17.
@@ -11,10 +10,11 @@ import java.util.Properties;
  */
 public class Database {
 
-    private static String PETFILE = "pet.properties";
+    private static String PETFILE = "save.json";
 
     DatabaseObject object;
     OutputStream output = null;
+    FileReader input = null;
 
 
     private static Database database;
@@ -27,5 +27,36 @@ public class Database {
     }
 
 
+    public DatabaseObject loadSaveFile(){
+        try {
+            input = new FileReader(PETFILE);
+            BufferedReader rdr = new BufferedReader(input);
+            String currentLine;
+            String fullContent = "";
+            while ((currentLine = rdr.readLine()) != null){
+                fullContent += currentLine;
+            }
+            rdr.close();
+            input.close();
+            Gson gson = new GsonBuilder().create();
+            return gson.fromJson(fullContent, DatabaseObject.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void saveSaveFile(DatabaseObject object){
+        Gson gson = new GsonBuilder().create();
+        String jsonobj = gson.toJson(object);
+        try {
+            output = new FileOutputStream(PETFILE);
+            PrintWriter writer = new PrintWriter(PETFILE, "UTF-8");
+            writer.println(jsonobj);
+            writer.close();
+        } catch (FileNotFoundException | UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
