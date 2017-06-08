@@ -1,0 +1,5 @@
+rootProject.name = 'openvirtualpet'
+include 'Core'
+include 'Database'
+include 'Pet'
+
