@@ -25,15 +25,12 @@ public class GameManager {
     /**
      * Launch the game, THIS IS NOT A NEW GAME.
      * Load database content and regenerate the pet.
-     * Make calculs based on time
      */
     public void launch(){
         DatabaseObject obj = Database.getDatabase().loadSaveFile();
         pet = obj.getPet();
         lastModif = obj.lastUpdate;
         updatePet();
-
-
     }
 
     /**
@@ -41,11 +38,27 @@ public class GameManager {
      * Do some calc
      */
     public void updatePet(){
+        long time = DatabaseObject.currentTimeSeconds();
 
+        time = time - lastModif;
+        while (time != 0){
+            updateOneSecond();
+            time--;
+        }
+    }
+
+    public void updateOneSecond(){
+        pet.hunger -= 10;
+        pet.thirst -= 10;
+        System.out.println("On update");
     }
 
     public boolean gameExists(){
         return Database.getDatabase().gameExists();
+    }
+
+    public boolean isPetAlive(){
+        return pet.hunger > 0 && pet.thirst > 0;
     }
 
 }

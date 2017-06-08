@@ -10,7 +10,7 @@ public class LibTest {
         if (!manager.gameExists())
             manager.newPet();
         manager.launch();
-        while (true){
+        while (manager.isPetAlive()){
 
             manager.updatePet();
 
