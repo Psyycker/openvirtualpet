@@ -1,3 +1,4 @@
+import items.drink.DrinkTypes;
 import items.food.FoodTypes;
 
 import java.util.Objects;
@@ -93,6 +94,8 @@ public class GameManager {
             case EAT:
                 pet.eat(FoodTypes.getFoodType(argument));
                 break;
+            case DRINK:
+                pet.drink(DrinkTypes.getDrinkType(argument));
         }
     }
 

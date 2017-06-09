@@ -1,3 +1,6 @@
+import items.drink.Drink;
+import items.drink.DrinkRegistry;
+import items.drink.DrinkTypes;
 import items.food.Food;
 import items.food.FoodRegistry;
 import items.food.FoodTypes;
@@ -39,6 +42,25 @@ public class Pet {
             thirst = BASE_THIRST;
 
         tired += food.getEnergyRestore();
+        if (tired > BASE_TIRED)
+            tired = BASE_TIRED;
+    }
+
+    public void drink(DrinkTypes type){
+        if (type == null)
+            return;
+
+        System.out.println(name + " drinked a " + type.toString());
+        Drink drink = DrinkRegistry.getDrinkWithType(type);
+        hunger += drink.getHungerRestore();
+        if (hunger > BASE_HUNGER)
+            hunger = BASE_HUNGER;
+
+        thirst += drink.getThirstRestore();
+        if (thirst > BASE_THIRST)
+            thirst = BASE_THIRST;
+
+        tired += drink.getEnergyRestore();
         if (tired > BASE_TIRED)
             tired = BASE_TIRED;
     }
