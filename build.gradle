@@ -1,5 +1,5 @@
 group 'com.psyycker'
-version '1.0-SNAPSHOT'
+version '0.1ALPHA'
 
 apply plugin: 'java'
 

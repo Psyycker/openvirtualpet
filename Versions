@@ -1,0 +1,29 @@
+0.1ALPHA :
+I can food my pet with 1 foodtype : burger
+My pet loose hunger, thirst and energy during time.
+Default name is George for now
+I can save game in a json file
+
+
+0.2ALPHA (Thirst update) :
+My pet can drink water (0, full, 0)
+
+
+0.3ALPHA (Diversity update) :
+Add a lot of food and drink with differents caracteristics
+
+0.4ALPHA (Obesity update) :
+Pet can be obese if he eat too much or drink bad drinks like cola
+
+0.5ALPHA (TIME UPDATE) :
+Do something take some time ! Now, when a pet do an action, this action take a moment do be done.
+
+0.6ALPHA (Sleep update) :
+Pet can now sleep. During sleep, drink and hunger loose is divided by 2
+Pet sleep until his energy is full !
+Technical :
+Adding state to pet.
+When state is sleep, updates change to be adapted (earn energy, loss divided by 2)
+
+1.0BETA (Sport update) :
+Because your pet can be obese, he can do some sport to loose weight
