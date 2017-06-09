@@ -16,6 +16,7 @@ public class Database {
     OutputStream output = null;
     FileReader input = null;
 
+    public static boolean bddUsed = false;
 
     private static Database database;
 

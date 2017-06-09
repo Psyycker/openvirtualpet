@@ -1,3 +1,7 @@
+import items.food.FoodTypes;
+
+import java.util.Objects;
+
 /**
  * Created by rvillulles on 08/06/17.
  *
@@ -8,6 +12,21 @@ public class GameManager {
     Pet pet;
     long lastModif;
 
+
+    private class UpdaterThread extends Thread{
+
+
+        @Override
+        public void run() {
+            DatabaseObject obj = new DatabaseObject(pet);
+            obj.lastUpdate = lastModif;
+            synchronized (Database.getDatabase()) {
+                Database.getDatabase().saveSaveFile(obj);
+            }
+        }
+    }
+
+
     /**
      * Make a new pet and write it
      *
@@ -17,8 +36,11 @@ public class GameManager {
         pet = new Pet();
         pet.name = "George";
         pet.age = 25;
-        Database.getDatabase().saveSaveFile(new DatabaseObject(pet));
         lastModif = DatabaseObject.currentTimeSeconds();
+        DatabaseObject obj = new DatabaseObject(pet);
+        obj.lastUpdate = lastModif;
+        Database.getDatabase().saveSaveFile(obj);
+        System.out.println("New pet created");
     }
 
 
@@ -45,12 +67,15 @@ public class GameManager {
             updateOneSecond();
             time--;
         }
+        lastModif = DatabaseObject.currentTimeSeconds();
+        new UpdaterThread().start();
+        System.out.println(pet.name + " : hunger : " + pet.hunger + ", thirst : " + pet.thirst + ", tired : " + pet.tired);
     }
 
     public void updateOneSecond(){
-        pet.hunger -= 10;
-        pet.thirst -= 10;
-        System.out.println("On update");
+        pet.hunger -= 1;
+        pet.thirst -= 1;
+        pet.tired -= 1;
     }
 
     public boolean gameExists(){
@@ -59,6 +84,16 @@ public class GameManager {
 
     public boolean isPetAlive(){
         return pet.hunger > 0 && pet.thirst > 0;
+    }
+
+    public void doAction(Actions action, String argument){
+        if (action == null)
+            return;
+        switch (action){
+            case EAT:
+                pet.eat(FoodTypes.getFoodType(argument));
+                break;
+        }
     }
 
 }

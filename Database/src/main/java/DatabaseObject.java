@@ -12,6 +12,7 @@ public class DatabaseObject {
     public String petName;
     public int hunger;
     public int thirst;
+    public int tired;
 
 
     public static long currentTimeSeconds(){
@@ -34,6 +35,7 @@ public class DatabaseObject {
         this.petName = pet.name;
         this.hunger = pet.hunger;
         this.thirst = pet.thirst;
+        this.tired = pet.tired;
     }
 
 
@@ -43,6 +45,7 @@ public class DatabaseObject {
         pet.name = petName;
         pet.hunger = hunger;
         pet.thirst = thirst;
+        pet.tired = tired;
         return pet;
     }
 
